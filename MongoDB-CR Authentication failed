@@ -1,0 +1,15 @@
+I am unbale to create a new user getting the error called MongoDB-CR Authentication failed
+This is how i resolved this error
+
+1) Start 3.0 without auth enabled. (Auth needs to be disabled otherwise you'll get the not authorized error).
+
+2) Run (after selecting "admin"use db):
+
+var schema = db.system.version.findOne({"_id" : "authSchema"})
+
+schema.currentVersion = 3
+
+db.system.version.save(schema)
+3) restart mongodb with auth enabled.
+
+4) Create a new admin user (the old one, the one you created before this workaround won't work).
