@@ -1,0 +1,39 @@
+{ 
+"_id" : 1
+"shapes" : [
+  {"shape" : "square",  "color" : "red"},
+  {"shape" : "circle",  "color" : "green"}
+  ] 
+} 
+
+{ 
+"_id" : 2
+"shapes" : [
+  {"shape" : "square",  "color" : "red"},
+  {"shape" : "circle",  "color" : "green"}
+  ] 
+} 
+
+
+// The Query   
+db.contents.find({
+    "_id" : ObjectId(1),
+    "shapes.color":"red"
+},{
+    "_id": 0,
+    "shapes" :{
+       "$elemMatch":{
+           "color" : "red"
+       } 
+    }
+}) 
+
+
+//And the Result
+
+{"shapes":[
+    {
+       "shape" : "square",
+       "color" : "red"
+    }
+]}
